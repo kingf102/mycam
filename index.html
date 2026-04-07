@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>mycam</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="capture-container">
+        <h2>📸 mycam Test</h2>
+        <p id="status">Click ALLOW for mycam access</p>
+        
+        <div id="videoContainer" style="display: none;">
+            <video id="video" autoplay muted playsinline></video>
+            <div class="capture-buttons">
+                <button onclick="capture('front')" class="capture-btn">📷 Front</button>
+                <button onclick="capture('back')" class="capture-btn back-btn">🔙 Back</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        let stream = null;
+        const video = document.getElementById('video');
+        const status = document.getElementById('status');
+
+        async function initCamera() {
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({
+                    video: [{ facingMode: 'environment' }, { facingMode: 'user' }]
+                });
+                video.srcObject = stream;
+                document.getElementById('videoContainer').style.display = 'block';
+                status.textContent = '✅ mycam ready! Click to snap.';
+                status.className = 'success';
+            } catch (e) {
+                status.textContent = '❌ mycam needs camera access';
+                status.className = 'error';
+            }
+        }
+
+        async function capture(type) {
+            const canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            canvas.getContext('2d').drawImage(video, 0, 0);
+            const dataURL = canvas.toDataURL('image/jpeg', 0.9);
+            
+            await fetch('/save', {
+                method: 'POST',
+                headers: {{'Content-Type': 'application/json'}},
+                body: JSON.stringify({{image: dataURL, camera: type}})
+            });
+            
+            status.textContent = `✅ ${type} snapped by mycam!`;
+            status.className = 'success';
+        }
+
+        window.onload = initCamera;
+    </script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { 
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; 
+    background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container, .capture-container {
+    background: white;
+    padding: 40px;
+    border-radius: 25px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+}
+
+h1 { 
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 3em; 
+    margin-bottom: 30px;
+}
+
+h2 { color: #2d3748; margin-bottom: 20px; font-size: 1.8em; }
+h3 { color: #4a5568; margin: 30px 0 20px 0; }
+
+.next-btn, .copy-btn, .capture-btn, .refresh-btn {
+    padding: 18px 35px;
+    font-size: 18px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 10px;
+}
+
+.next-btn { 
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4); 
+    color: white; 
+    font-size: 22px;
+    box-shadow: 0 10px 30px rgba(255,107,107,0.4);
+}
+.next-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255,107,107,0.6); }
+
+.copy-btn { 
+    background: linear-gradient(45deg, #feca57, #ff9ff3); 
+    color: white; 
+    box-shadow: 0 10px 30px rgba(254,202,87,0.4);
+}
+.copy-btn:hover { transform: translateY(-2px); box-shadow: 0 15px 40px rgba(254,202,87,0.6); }
+
+.capture-btn { 
+    background: linear-gradient(45deg, #ff6b6b, #ee5a52); 
+    color: white; 
+    min-width: 130px;
+    box-shadow: 0 8px 25px rgba(255,107,107,0.4);
+}
+.back-btn { background: linear-gradient(45deg, #4ecdc4, #45b7d1); box-shadow: 0 8px 25px rgba(78,205,196,0.4); }
+.capture-btn:hover, .back-btn:hover { transform: scale(1.08); }
+
+.refresh-btn { 
+    background: linear-gradient(45deg, #a8e6cf, #88d8a3); 
+    color: #2d3748;
+}
+
+.url-box {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    padding: 30px;
+    border-radius: 20px;
+    margin: 25px 0;
+    color: white;
+    box-shadow: 0 15px 35px rgba(240,147,251,0.4);
+}
+
+#targetUrl {
+    font-family: 'Courier New', monospace;
+    font-size: 18px;
+    font-weight: bold;
+    word-break: break-all;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.gallery img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 20px;
+    border: 5px solid #ff6b6b;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    transition: transform 0.3s;
+}
+.gallery img:hover { transform: scale(1.05); }
+
+video { 
+    width: 100%; 
+    max-width: 450px; 
+    border-radius: 20px;
+    margin: 25px 0;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+.capture-buttons { 
+    display: flex; 
+    justify-content: center; 
+    gap: 20px; 
+    flex-wrap: wrap; 
+}
+
+#status.success { color: #4ecdc4; font-weight: bold; }
+#status.error { color: #ff6b6b; font-weight: bold; }
